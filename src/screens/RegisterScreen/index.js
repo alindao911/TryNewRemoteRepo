@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {
   ScrollView,
@@ -7,12 +8,15 @@ import {
   StyleSheet,
   Dimensions,
   Alert,
+  Button,
+  Image,
 } from 'react-native';
 import NavigationService from '../../navigation/NavigationService';
 import {NAVIGATION_LOGIN_SCREEN, PRIVATE_ROUTE} from '../../navigation/routes';
 import ValidationComponent from 'react-native-form-validator';
 import firebase from 'firebase';
 import {ProgressDialog} from 'react-native-simple-dialogs';
+import ImagePicker from 'react-native-image-picker';
 
 const validations = {
   email: {
@@ -45,6 +49,7 @@ export default class RegisterScreen extends ValidationComponent {
       fullname: '',
       bio: '',
       progressVisibile: false,
+      filepath: '',
     };
   }
 
@@ -95,9 +100,46 @@ export default class RegisterScreen extends ValidationComponent {
       });
   };
 
+  chooseFile = () => {
+    var options = {
+      title: 'Select Image',
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+
+    ImagePicker.showImagePicker(options, response => {
+      console.log('Response', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('Image Picker:', response.error);
+      } else {
+        let source = response;
+        this.setState({
+          filepath: source,
+        });
+      }
+    });
+  };
+
   render() {
+    console.log(this.state.filepath);
     return (
       <ScrollView contentContainerStyle={styles.container}>
+        {this.state.filepath !== '' && (
+          <Image
+            source={{uri: this.state.filepath.uri}}
+            style={{width: 150, height: 150, borderRadius: 50}}
+          />
+        )}
+        <Button
+          title="Choose profile image"
+          onPress={() => this.chooseFile()}
+          style={{marginBottom: '15'}}
+        />
         <TextInput
           placeholder="Fullname"
           style={[styles.input]}

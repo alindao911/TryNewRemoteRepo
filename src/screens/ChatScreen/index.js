@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import styles from '../../constants/styles';
 import firebase from 'firebase';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const isIOS = Platform.OS === 'ios';
 

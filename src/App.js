@@ -3,6 +3,8 @@ import React from 'react';
 import Navigator from './navigation/Navigator';
 import NavigationService from './navigation/NavigationService';
 import firebase from 'firebase';
+import {Provider as StoreProvider} from 'react-redux';
+import store from './store';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBqvDMofzdjHMHeVc4Bmxgz3dJcvuBwFWE',
@@ -23,11 +25,13 @@ const App = () => {
   }
 
   return (
-    <Navigator
-      ref={navigatorRef => {
-        NavigationService.setTopLevelNavigator(navigatorRef);
-      }}
-    />
+    <StoreProvider store={store}>
+      <Navigator
+        ref={navigatorRef => {
+          NavigationService.setTopLevelNavigator(navigatorRef);
+        }}
+      />
+    </StoreProvider>
   );
 };
 

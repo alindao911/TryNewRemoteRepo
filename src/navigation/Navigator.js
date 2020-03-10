@@ -2,7 +2,7 @@ import React from 'react';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {
   AuthLoadingScreen,
@@ -33,7 +33,6 @@ export const defaultHeader = {
     backgroundColor: 'skyblue',
   },
   headerTitleStyle: {
-    fontFamily: 'sans-serif',
     color: '#fff',
     fontSize: 20,
     fontStyle: 'normal',
@@ -94,10 +93,10 @@ const TabNavigator = createBottomTabNavigator(
         if (routeName === NAVIGATION_BOTTOM_CHATS) {
           iconName = 'home';
         } else if (routeName === NAVIGATION_BOTTOM_PROFILE) {
-          iconName = 'user-alt';
+          iconName = 'user';
         }
 
-        return <Icon name={iconName} size={20} color={tintColor} />;
+        return <Icon name={iconName} size={25} color={tintColor} />;
       },
     }),
     tabBarOptions: {

@@ -1,6 +1,5 @@
 import React from 'react';
-import {ActivityIndicator, AsyncStorage, StatusBar, View} from 'react-native';
-import User from '../../../User';
+import {ActivityIndicator, StatusBar, View} from 'react-native';
 import NavagationService from '../../navigation/NavigationService';
 import {PRIVATE_ROUTE, PUBLIC_ROUTE} from '../../navigation/routes';
 import firebase from 'firebase';
@@ -13,7 +12,6 @@ export default class AuthLoadingScreen extends React.Component {
 
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {
-    User.phone = await AsyncStorage.getItem('userPhone');
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         NavagationService.navigate(PRIVATE_ROUTE);
